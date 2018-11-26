@@ -1,0 +1,15 @@
+{
+  "name": "spectrum-web-components",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@adobe/spectrum-css": "^2.6.0",
+    "glob": "^7.1.3",
+    "mkdirp": "^0.5.1",
+    "rmdir": "^1.2.0"
+  },
+  "scripts": {
+    "spectrum-convert": "node bin/css2js.js '**/*.css' './node_modules/@adobe/spectrum-css/dist/components' './spectrum' && node bin/css2js.js '*.css' './node_modules/@adobe/spectrum-css/dist/vars' './spectrum/vars' && node bin/css2js.js '*.css' './node_modules/@adobe/spectrum-css/dist' './spectrum'",
+    "clean": "node bin/clean.js './spectrum'"
+  }
+}

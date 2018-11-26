@@ -1,0 +1,10 @@
+export default { 
+    css() {
+        return `
+/* generated from dna-version: 5.3.0 */
+.spectrum--large .spectrum-Link {
+  transition: color 130ms ease-in-out;
+}
+/* generated from dna-version: 5.3.0 */`;
+    }
+}
