@@ -7,7 +7,7 @@ It will not support older browsers and will only target modern ever-green browse
 # Requirements
 
 -   NodeJS >= 8.10.0
--   Typescript
+-   TypeScript >= 3.0.0
 -   Browsers with Custom Elements V1 and Shadow DOM support, e.g. Chrome, Firefox, Safari.
 
 # Installation
@@ -68,6 +68,10 @@ In Visual Studio Code you can hide the untracked files by adding the following t
     }
 }
 ```
+
+# Design Goals
+
+We are striving to implement against the browser standards. Having said that, we are also using TypeScript
 
 # Contributing
 
