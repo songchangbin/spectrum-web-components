@@ -131,15 +131,13 @@ export class SpectrumIcon extends HTMLElement {
         if (!this.iconContainer) {
             return;
         }
-        if (!this.icon && !this.src) {
-            this.iconContainer.innerHTML = '';
-            return;
-        }
+        // if we have a src, just set the icon container to an img pointing to that src
         if (this.src) {
             this.iconContainer.innerHTML = `<img src='${this.src}'/>`;
             return;
-        }
-        if (!this.icon) {
+        } else if (!this.icon) {
+            // otherwise if we have no icon, clear our content
+            this.iconContainer.innerHTML = '';
             return;
         }
         // parse the icon name to get iconset name
