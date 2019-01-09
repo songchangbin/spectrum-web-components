@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <title>Iconset - Spectrum Web Components</title>
-        <script src="../../icons/spectrum-icons.js" type="module"></script>
         <script src="../../icon/icon.js" type="module"></script>
+        <script src="../../icons/icons-medium.js" type="module"></script>
         <script src="../../demo-page/index.js" type="module"></script>
         <link rel="stylesheet" href="../../../styles/core-global/all.css" />
         <link rel="stylesheet" href="../../../styles/typography/font.css" />
@@ -13,12 +13,61 @@
 
     <body>
         <demo-page title="Icon">
+            <demo-section title="Icon Sizes" show-demo-code>
+                <div slot="description">
+                    You can specify icon size through the use of the
+                    <code>size</code>
+                    attribute, specifying sizes from
+                    <code>xxs</code>
+                    through to
+                    <code>xxl</code>
+                    .
+                </div>
+                <div slot="demo">
+                    <spectrum-icons-medium></spectrum-icons-medium>
+                    <spectrum-icon
+                        size="xxs"
+                        icon="ui:Magnifier"
+                    ></spectrum-icon>
+                    <spectrum-icon
+                        size="xs"
+                        icon="ui:Magnifier"
+                    ></spectrum-icon>
+                    <spectrum-icon size="s" icon="ui:Magnifier"></spectrum-icon>
+                    <spectrum-icon size="m" icon="ui:Magnifier"></spectrum-icon>
+                    <spectrum-icon size="l" icon="ui:Magnifier"></spectrum-icon>
+                    <spectrum-icon
+                        size="xl"
+                        icon="ui:Magnifier"
+                    ></spectrum-icon>
+                    <spectrum-icon
+                        size="xxl"
+                        icon="ui:Magnifier"
+                    ></spectrum-icon>
+                </div>
+            </demo-section>
+            <demo-section title="Icon Color" show-demo-code>
+                <div slot="description">
+                    When using SVG icons you can specify icon color through
+                    styling css as expected.
+                </div>
+                <div slot="demo">
+                    <spectrum-icons-medium></spectrum-icons-medium>
+                    <spectrum-icon
+                        size="l"
+                        icon="ui:Magnifier"
+                        style="color: blue"
+                    ></spectrum-icon>
+                </div>
+            </demo-section>
             <demo-section title="Image Icons" show-demo-code>
                 <div slot="description">
-                    Icons can use images, passed in as lightdom content.
+                    Icons can use images specified as a src url.
                 </div>
-                <div slot="demo" style="display: flex; flex-direction: row;">
+                <div slot="demo">
+                    <spectrum-icon size="s" src="./PS_icon.png"></spectrum-icon>
                     <spectrum-icon size="m" src="./PS_icon.png"></spectrum-icon>
+                    <spectrum-icon size="l" src="./PS_icon.png"></spectrum-icon>
                 </div>
             </demo-section>
         </demo-page>

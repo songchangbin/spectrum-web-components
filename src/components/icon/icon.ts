@@ -47,9 +47,24 @@ export class SpectrumIcon extends HTMLElement {
         }) as EventListener;
         window.addEventListener('spectrum-iconset-added', this.iconsetListener);
 
-        // if we have an icon name and the container we can update the icon immediately
-        if (this.icon && this.iconContainer) {
-            this.updateIcon();
+        this.updateIcon();
+    }
+
+    /**
+     * Getter for src attribute
+     */
+    public get src(): string | null {
+        return this.getAttribute('src');
+    }
+
+    /**
+     * Setter for src attribute
+     */
+    public set src(value: string | null) {
+        if (value) {
+            this.setAttribute('src', value);
+        } else {
+            this.removeAttribute('src');
         }
     }
 
@@ -116,8 +131,15 @@ export class SpectrumIcon extends HTMLElement {
         if (!this.iconContainer) {
             return;
         }
-        if (!this.icon) {
+        if (!this.icon && !this.src) {
             this.iconContainer.innerHTML = '';
+            return;
+        }
+        if (this.src) {
+            this.iconContainer.innerHTML = `<img src='${this.src}'/>`;
+            return;
+        }
+        if (!this.icon) {
             return;
         }
         // parse the icon name to get iconset name
