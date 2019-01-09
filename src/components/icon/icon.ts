@@ -148,7 +148,6 @@ export class SpectrumIcon extends HTMLElement {
 
         // try to retrieve the iconset
         const iconset = registry.getIconset(icon.iconset);
-        // if we didn't get the iconset, register a listener to see if we get it later
         if (!iconset) {
             // we can stop here as there's nothing to be done till we get the iconset
             return;
