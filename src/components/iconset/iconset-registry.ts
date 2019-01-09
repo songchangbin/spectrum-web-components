@@ -18,7 +18,7 @@ export class IconsetRegistry {
 
         // dispatch a spectrum-iconset-added event on window to let everyone know we have a new iconset
         // note we're using window here for efficiency since we don't need to bubble through the dom since everyone
-        // will know where to look for this eventU
+        // will know where to look for this event
         const event = new CustomEvent('spectrum-iconset-added', {
             detail: { name, iconset },
         });
@@ -28,7 +28,7 @@ export class IconsetRegistry {
         this.iconsetMap.delete(name);
         // dispatch a spectrum-iconset-removed event on window to let everyone know we have a new iconset
         // note we're using window here for efficiency since we don't need to bubble through the dom since everyone
-        // will know where to look for this eventU
+        // will know where to look for this event
         const event = new CustomEvent('spectrum-iconset-removed', {
             detail: { name },
         });

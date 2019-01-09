@@ -42,6 +42,9 @@ export class SpectrumIconset extends HTMLElement {
     public set name(value: string | null) {
         this.updateName(value);
     }
+    /**
+     * Applies an icon to the given element
+     */
     public applyIconToElement(
         el: HTMLElement,
         icon: string,
@@ -50,6 +53,24 @@ export class SpectrumIconset extends HTMLElement {
         // inject the requested icon from the iconset into the element
         // add into the elements shadow dom if it has one
         throw new Error('Not implemented!');
+    }
+    /**
+     * On connected we register the iconset
+     */
+    protected connectedCallback() {
+        if (!this.name) {
+            return;
+        }
+        registry.addIconset(this.name, this);
+    }
+    /**
+     * On disconnected we remove the iconset
+     */
+    protected disconnectedCallback() {
+        if (!this.name) {
+            return;
+        }
+        registry.removeIconset(this.name);
     }
     /**
      * Updates the name attribute

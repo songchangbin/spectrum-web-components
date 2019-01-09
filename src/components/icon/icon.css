@@ -36,8 +36,7 @@ governing permissions and limitations under the License.
 }
 
 img,
-svg,
-::slotted(img) {
+svg {
     height: var(--spectrum-icon-size);
     width: var(--spectrum-icon-size);
 }

@@ -31,6 +31,22 @@ export class SpectrumIcon extends HTMLElement {
         this.shadowRoot.innerHTML = this.render();
         this.iconContainer = this.shadowRoot.querySelector('#container');
 
+        // start listening for iconset-added and do updateIcon if we get one later
+        this.iconsetListener = ((ev: CustomEvent) => {
+            if (!this.icon) {
+                return;
+            }
+            // parse the icon name to get iconset name
+            const icon = this.parseIcon(this.icon);
+            if (!icon) {
+                return;
+            }
+            if (ev.detail.name === icon.iconset) {
+                this.updateIcon();
+            }
+        }) as EventListener;
+        window.addEventListener('spectrum-iconset-added', this.iconsetListener);
+
         // if we have an icon name and the container we can update the icon immediately
         if (this.icon && this.iconContainer) {
             this.updateIcon();
@@ -83,6 +99,19 @@ export class SpectrumIcon extends HTMLElement {
         `;
     }
 
+    private parseIcon(icon: string) {
+        if (!icon) {
+            return null;
+        }
+        const iconParts = icon.split(':');
+        let iconsetName = 'default';
+        let iconName = icon;
+        if (iconParts.length > 1) {
+            iconsetName = iconParts[0];
+            iconName = iconParts[1];
+        }
+        return { iconset: iconsetName, icon: iconName };
+    }
     private updateIcon() {
         if (!this.iconContainer) {
             return;
@@ -92,42 +121,27 @@ export class SpectrumIcon extends HTMLElement {
             return;
         }
         // parse the icon name to get iconset name
-        const iconParts = this.icon.split(':');
-        let iconsetName = 'default';
-        let iconName = this.icon;
-        if (iconParts.length > 1) {
-            iconsetName = iconParts[0];
-            iconName = iconParts[1];
+        const icon = this.parseIcon(this.icon);
+        if (!icon) {
+            return;
         }
+
         // try to retrieve the iconset
-        const iconset = registry.getIconset(iconsetName);
+        const iconset = registry.getIconset(icon.iconset);
         // if we didn't get the iconset, register a listener to see if we get it later
-        if (!iconset && !this.iconsetListener) {
-            // start listening for iconset-added and do updateIcon if we get one later
-            this.iconsetListener = this.updateIcon.bind(this);
-            window.addEventListener(
-                'spectrum-iconset-added',
-                this.iconsetListener
-            );
+        if (!iconset) {
             // we can stop here as there's nothing to be done till we get the iconset
             return;
         }
+        // clean out any existing icon before applying the new one
+        this.iconContainer.innerHTML = '';
         // if we got our iconset and we registered a listener previously, we should remove it
-        if (iconset) {
-            if (this.iconsetListener) {
-                window.removeEventListener(
-                    'spectrum-iconset-added',
-                    this.iconsetListener
-                );
-                this.iconsetListener = null;
-            }
-            // and now we can set the icon
-            iconset.applyIconToElement(
-                this.iconContainer,
-                iconName,
-                this.size ? this.size : ''
-            );
-        }
+        // and now we can set the icon
+        iconset.applyIconToElement(
+            this.iconContainer,
+            icon.icon,
+            this.size ? this.size : ''
+        );
     }
 }
 
