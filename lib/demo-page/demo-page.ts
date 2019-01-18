@@ -10,36 +10,36 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, LitElement, property } from '@polymer/lit-element';
+import { html, LitElement, property } from 'lit-element';
 
 // @ts-ignore - css generated at build time
-import cardBaseStyles from './card-base.css.js';
-// @ts-ignore - css generated at build time
-import cardStyles from './card.css.js';
+import styles from './demo-page.css.js';
 
-export class SpectrumCard extends LitElement {
-    public static is = 'spectrum-card';
+export class DemoPage extends LitElement {
+    public static is = 'demo-page';
 
     @property({ type: String })
     public title = '';
 
-    @property({ type: String })
-    public subtitle = '';
-
     protected render() {
         return html`
             <style>
-                ${cardBaseStyles}
-                ${cardStyles}
+                ${styles}
             </style>
-            <slot name="cover-photo"></slot>
-            <div id="body">
-                <div id="header"><div id="title">${this.title}</div></div>
-                <div id="content">
-                    <div id="subtitle">${this.subtitle}</div>
+            <div id="container">
+                <div id="heading">
+                    <div id="heading-container">
+                        ${
+                            this.title &&
+                                html`
+                                    <h1>${this.title}</h1>
+                                `
+                        }
+                        <slot name="heading"></slot>
+                    </div>
                 </div>
+                <slot></slot>
             </div>
-            <div id="footer"><slot name="footer"></slot></div>
         `;
     }
 }

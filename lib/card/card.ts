@@ -10,17 +10,15 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, LitElement, property } from '@polymer/lit-element';
+import { html, LitElement, property } from 'lit-element';
 
 // @ts-ignore - css generated at build time
 import cardBaseStyles from './card-base.css.js';
 // @ts-ignore - css generated at build time
-import cardGalleryStyles from './card-gallery.css.js';
-// @ts-ignore - css generated at build time
-import cardQuietStyles from './card-quiet.css.js';
+import cardStyles from './card.css.js';
 
-export class SpectrumGalleryCard extends LitElement {
-    public static is = 'spectrum-card-gallery';
+export class SpectrumCard extends LitElement {
+    public static is = 'spectrum-card';
 
     @property({ type: String })
     public title = '';
@@ -32,18 +30,16 @@ export class SpectrumGalleryCard extends LitElement {
         return html`
             <style>
                 ${cardBaseStyles}
-                ${cardQuietStyles}
-                ${cardGalleryStyles}
+                ${cardStyles}
             </style>
             <slot name="cover-photo"></slot>
-            <slot name="preview"></slot>
             <div id="body">
-                <div id="header">
-                    <div id="title">${this.title}</div>
+                <div id="header"><div id="title">${this.title}</div></div>
+                <div id="content">
                     <div id="subtitle">${this.subtitle}</div>
-                    <slot name="description"></slot>
                 </div>
             </div>
+            <div id="footer"><slot name="footer"></slot></div>
         `;
     }
 }

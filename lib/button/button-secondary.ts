@@ -10,21 +10,23 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, LitElement } from '@polymer/lit-element';
+import { html } from 'lit-element';
 
 // @ts-ignore - css generated at build time
-import buttonStyles from './button.css.js';
+import secondaryButtonStyles from './button-secondary.css.js';
 
-export class SpectrumButton extends LitElement {
-    public static is = 'spectrum-button';
+import { SpectrumButton } from './button';
+
+export class SpectrumSecondaryButton extends SpectrumButton {
+    public static is = 'spectrum-button-secondary';
 
     protected render() {
+        const renderedHTML = super.render();
         return html`
+            ${renderedHTML}
             <style>
-                ${buttonStyles}
+                ${secondaryButtonStyles}
             </style>
-            <div id="icon"><slot name="icon"></slot></div>
-            <div id="label"><slot></slot></div>
         `;
     }
 }

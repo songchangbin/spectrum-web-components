@@ -9,18 +9,23 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import { defineCustomElement } from '../../../define';
+import { html } from 'lit-element';
 
-import { SpectrumBanner } from '../';
+// @ts-ignore - css generated at build time
+import primaryButtonStyles from './button-primary.css.js';
 
-defineCustomElement(SpectrumBanner);
+import { SpectrumButton } from './button';
 
-describe('banner', () => {
-    it('loads', () => {
-        const el = document.querySelector('spectrum-banner') as HTMLElement;
-        expect(el).to.not.equal(undefined);
-        expect(el.textContent).to.include('Header Text');
-        expect(el.textContent).to.include('Content');
-        return true;
-    });
-});
+export class SpectrumPrimaryButton extends SpectrumButton {
+    public static is = 'spectrum-button-primary';
+
+    protected render() {
+        const renderedHTML = super.render();
+        return html`
+            ${renderedHTML}
+            <style>
+                ${primaryButtonStyles}
+            </style>
+        `;
+    }
+}

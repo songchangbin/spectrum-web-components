@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 
 /* import the css from prism node module, this will be inlined by postcss */
-@import './../../../node_modules/prismjs/themes/prism.css';
+@import '../../node_modules/prismjs/themes/prism.css';
 
 :host {
     display: block;

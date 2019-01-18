@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, LitElement, property } from '@polymer/lit-element/lit-element';
+import { html, LitElement, property } from 'lit-element';
 
 // @ts-ignore - css generated at build time
 import styles from './demo-section.css.js';

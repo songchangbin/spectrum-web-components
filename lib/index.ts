@@ -12,4 +12,7 @@ governing permissions and limitations under the License.
 export * from './banner';
 export * from './button';
 export * from './card';
-export * from './demo-page';
+
+export * from './define';
+
+// NOTE: we do not export demo-page because it has dependencies on other modules we don't want to force on users

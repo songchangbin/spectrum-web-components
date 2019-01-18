@@ -10,7 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, LitElement, property } from '@polymer/lit-element';
+import { html, LitElement, property } from 'lit-element';
+
 import { stripIndent } from 'common-tags';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 
