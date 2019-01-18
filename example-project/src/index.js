@@ -11,16 +11,20 @@ governing permissions and limitations under the License.
 */
 
 // import the global stylesheets
-import '../../dist/styles/core-global/all.css';
-import '../../dist/styles/typography/font.css';
+import '../../styles/core-global/all.css';
+import '../../styles/typography/font.css';
 
 // import theme specific aliases
-import '../../dist/styles/theme-light/alias.css';
+import '../../styles/theme-light/alias.css';
 
 // import skin and scale stylesheets for our used components
-import '../../dist/styles/scale-medium/components/button.css';
-import '../../dist/styles/theme-light/components/button.css';
+import '../../styles/scale-medium/components/button.css';
+import '../../styles/theme-light/components/button.css';
 
 // import the components we'll use in this page
-import '../../dist/components/button/button-primary';
-import '../../dist/components/button/button-secondary';
+import {
+    defineCustomElements,
+    SpectrumPrimaryButton,
+    SpectrumSecondaryButton,
+} from '../../lib';
+defineCustomElements(SpectrumPrimaryButton, SpectrumSecondaryButton);

@@ -21,13 +21,15 @@ const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const wrap = require('gulp-wrap');
 
-const srcPath = path.resolve(path.join(__dirname, '..', 'src'));
+const srcPath = path.resolve(path.join(__dirname, '..'));
 const configPath = path.resolve(path.join(__dirname, '..', 'config'));
 
 const buildCSS = () => {
     return (
         gulp
-            .src(path.join(srcPath, '**/*.css'))
+            .src(['./lib/**/*.css', './styles/*.css', './styles/**/*.css'], {
+                base: srcPath,
+            })
             // create in-memory cache of css files so we don't reprocess everything all the time
             .pipe(cached('css'))
             .pipe(debug({ title: 'css' }))
