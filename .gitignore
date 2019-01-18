@@ -1,8 +1,10 @@
-src/**/*.js
-src/**/*.d.ts
-src/**/*.js.map
-src/**/*.d.ts.map
-src/**/*.css.js
+**/*.js
+!scripts/*.js
+!tasks/*.js
+**/*.d.ts
+**/*.js.map
+**/*.d.ts.map
+**/*.css.js
 dist
 node_modules
 npm-debug.log
