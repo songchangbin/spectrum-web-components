@@ -13,7 +13,7 @@ governing permissions and limitations under the License.
 // @ts-ignore - css generated at build time
 import styles from './icon.css.js';
 
-import { registry } from '../iconset/iconset-registry';
+import { IconsetRegistry } from '../iconset/iconset-registry';
 
 export class SpectrumIcon extends HTMLElement {
     public static readonly is: string = 'spectrum-icon';
@@ -147,7 +147,7 @@ export class SpectrumIcon extends HTMLElement {
         }
 
         // try to retrieve the iconset
-        const iconset = registry.getIconset(icon.iconset);
+        const iconset = IconsetRegistry.getInstance().getIconset(icon.iconset);
         if (!iconset) {
             // we can stop here as there's nothing to be done till we get the iconset
             return;
@@ -162,8 +162,4 @@ export class SpectrumIcon extends HTMLElement {
             this.size ? this.size : ''
         );
     }
-}
-
-if (!customElements.get(SpectrumIcon.is)) {
-    customElements.define(SpectrumIcon.is, SpectrumIcon);
 }

@@ -6,9 +6,20 @@
         <script src="../../icon/icon.js" type="module"></script>
         <script src="../../icons/icons-medium.js" type="module"></script>
         <script src="../../demo-page/index.js" type="module"></script>
-        <link rel="stylesheet" href="../../../styles/core-global/all.css" />
-        <link rel="stylesheet" href="../../../styles/typography/font.css" />
-        <link rel="stylesheet" href="../../../styles/scale-medium/all.css" />
+        <script type="module">
+            // import the define helper
+            import { defineCustomElements } from '../../index.js';
+            // import and define the demo page components
+            import * as DemoElements from '../../demo-page/index.js';
+            defineCustomElements(...Object.values(DemoElements));
+            // import the elements we're going to demo
+            import * as Elements from '../index.js';
+            defineCustomElements(...Object.values(Elements));
+            // import the icons we want to use
+            import * as Icons from '../../icons/icons-medium.js';
+            defineCustomElements(...Object.values(Icons));
+        </script>
+        <link rel="stylesheet" href="../../../styles/all-medium-light.css" />
     </head>
 
     <body>

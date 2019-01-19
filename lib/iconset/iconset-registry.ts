@@ -12,7 +12,17 @@ governing permissions and limitations under the License.
 import { SpectrumIconset } from './iconset';
 
 export class IconsetRegistry {
+    // singleton getter
+    public static getInstance() {
+        if (!IconsetRegistry.instance) {
+            IconsetRegistry.instance = new IconsetRegistry();
+        }
+        return IconsetRegistry.instance;
+    }
+    private static instance: IconsetRegistry;
+
     private iconsetMap = new Map<string, SpectrumIconset>();
+
     public addIconset(name: string, iconset: SpectrumIconset) {
         this.iconsetMap.set(name, iconset);
 
@@ -38,7 +48,3 @@ export class IconsetRegistry {
         return this.iconsetMap.get(name);
     }
 }
-
-// create singleton instance of the iconset registry
-const registry = new IconsetRegistry();
-export { registry };

@@ -12,10 +12,10 @@ governing permissions and limitations under the License.
 
 import { SpectrumIconsetSVG } from '../iconset/iconset-svg';
 
-import iconsSVG from './icons-medium.svg.js';
+import iconsSVG from './icons-large.svg.js';
 
-export class SpectrumIconsMedium extends SpectrumIconsetSVG {
-    public static readonly is: string = 'spectrum-icons-medium';
+export class SpectrumIconsLarge extends SpectrumIconsetSVG {
+    public static readonly is: string = 'spectrum-icons-large';
 
     constructor() {
         super();
@@ -33,8 +33,4 @@ export class SpectrumIconsMedium extends SpectrumIconsetSVG {
     protected createIconName(icon: string) {
         return `spectrum-icon-${icon}`;
     }
-}
-
-if (!customElements.get(SpectrumIconsMedium.is)) {
-    customElements.define(SpectrumIconsMedium.is, SpectrumIconsMedium);
 }

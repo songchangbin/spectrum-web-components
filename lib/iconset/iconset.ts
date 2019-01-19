@@ -13,7 +13,7 @@ governing permissions and limitations under the License.
 // @ts-ignore - css generated at build time
 import styles from './iconset.css.js';
 
-import { registry } from './iconset-registry';
+import { IconsetRegistry } from './iconset-registry';
 
 export class SpectrumIconset extends HTMLElement {
     public static readonly is: string = 'spectrum-iconset';
@@ -61,7 +61,7 @@ export class SpectrumIconset extends HTMLElement {
         if (!this.name) {
             return;
         }
-        registry.addIconset(this.name, this);
+        IconsetRegistry.getInstance().addIconset(this.name, this);
     }
     /**
      * On disconnected we remove the iconset
@@ -70,7 +70,7 @@ export class SpectrumIconset extends HTMLElement {
         if (!this.name) {
             return;
         }
-        registry.removeIconset(this.name);
+        IconsetRegistry.getInstance().removeIconset(this.name);
     }
     /**
      * Updates the name attribute
@@ -80,7 +80,7 @@ export class SpectrumIconset extends HTMLElement {
     private updateName(value: string | null, reflect: boolean = true) {
         if (this.name) {
             // remove from the iconset map using the old name
-            registry.removeIconset(this.name);
+            IconsetRegistry.getInstance().removeIconset(this.name);
         }
 
         if (value) {
@@ -88,13 +88,9 @@ export class SpectrumIconset extends HTMLElement {
                 this.setAttribute('name', value);
             }
             // set in the map using the new name
-            registry.addIconset(value, this);
+            IconsetRegistry.getInstance().addIconset(value, this);
         } else if (reflect) {
             this.removeAttribute('name');
         }
     }
-}
-
-if (!customElements.get(SpectrumIconset.is)) {
-    customElements.define(SpectrumIconset.is, SpectrumIconset);
 }
