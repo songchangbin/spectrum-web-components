@@ -1,6 +1,7 @@
 lib
 src/**/*.css.ts
 styles/**/*.css.ts
+docs
 
 node_modules
 npm-debug.log
