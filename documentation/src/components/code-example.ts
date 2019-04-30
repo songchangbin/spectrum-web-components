@@ -10,4 +10,18 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import 'global.css';
+import { LitElement, html, customElement, property } from 'lit-element';
+import { toHtmlTemplateString } from '../utils/templates';
+
+@customElement('code-example')
+export default class CodeExample extends LitElement {
+    @property()
+    code = '';
+
+    render() {
+        return html`
+            <div>${toHtmlTemplateString(this.code)}</div>
+            <div>${this.code}</div>
+        `;
+    }
+}

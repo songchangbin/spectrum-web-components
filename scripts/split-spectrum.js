@@ -46,6 +46,7 @@ const splitCSS = (
                 // no matching result, continue to the next line
                 return;
             }
+            console.log(line);
             const moduleName = match[1];
             const isTopLevel = topLevelModules.includes(moduleName);
             const fileName = `${moduleName}.css`;
@@ -133,6 +134,7 @@ const components = [
     'fieldlabel',
     'radio',
     'popover',
+    'sidenav',
     'tabs',
 ];
 

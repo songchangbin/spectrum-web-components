@@ -10,4 +10,37 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import 'global.css';
+body,
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.layout {
+    width: 100%;
+    height: 100vh;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    padding-bottom: 40px;
+}
+
+.body > div {
+    padding: 1.5em;
+}
+
+.body .layout-content {
+    overflow: auto;
+    height: 100%;
+}

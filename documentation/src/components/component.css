@@ -10,4 +10,6 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import 'global.css';
+.docExample {
+    margin: 1.2em 0 1.5em 0;
+}

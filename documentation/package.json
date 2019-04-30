@@ -1,0 +1,42 @@
+{
+    "name": "spectrum-web-components-documentation",
+    "version": "0.0.1",
+    "description": "Documentation for the spectrum-web-components project",
+    "main": "webpack.common.config.js",
+    "scripts": {
+        "build": "npx webpack --mode production",
+        "start": "npx webpack-dev-server --mode development --open",
+        "start:build": "npx http-server dist -o"
+    },
+    "author": "Adobe Inc.",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/preset-typescript": "^7.3.3",
+        "@open-wc/building-webpack": "^1.1.1",
+        "@open-wc/polyfills-loader": "^0.3.0",
+        "@types/node": "^11.12.2",
+        "@types/prismjs": "^1.16.0",
+        "@types/webpack": "^4.4.26",
+        "@types/webpack-env": "^1.13.9",
+        "@vaadin/router": "^1.2.0",
+        "common-tags": "^1.8.0",
+        "css-loader": "^2.1.1",
+        "html-loader": "^0.5.5",
+        "http-server": "^0.11.1",
+        "lit-css-loader": "0.0.3",
+        "lit-element": "^2.1.0",
+        "lit-html": "^1.0.0",
+        "markdown-loader": "^5.0.0",
+        "prismjs": "^1.16.0",
+        "raw-loader": "^2.0.0",
+        "spectrum-web-components": "..",
+        "style-loader": "^0.23.1",
+        "ts-loader": "^5.3.3",
+        "typescript": "^3.3.4000",
+        "webpack": "^4.29.6",
+        "webpack-cli": "^3.3.0",
+        "webpack-dev-server": "^3.2.1",
+        "webpack-merge": "^4.2.1"
+    },
+    "dependencies": {}
+}

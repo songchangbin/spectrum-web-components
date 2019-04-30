@@ -10,4 +10,27 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import 'global.css';
+.header {
+    padding: 10px;
+    flex: 0 0 auto;
+    display: flex;
+}
+
+.header svg {
+    width: 32px;
+    height: 27px;
+}
+
+.header h2 {
+    padding-right: 17px;
+}
+
+:global(.spectrum-Link) {
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 17px;
+    margin-bottom: 8px;
+    margin-top: 17px;
+    margin-left: 11px;
+}

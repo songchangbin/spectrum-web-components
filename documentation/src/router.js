@@ -10,4 +10,17 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import 'global.css';
+import { Router } from '@vaadin/router';
+
+const githubUrl =
+    'https://git.corp.adobe.com/pages/ponysaurus/react-spectrum-web-components/';
+const baseUrl =
+    document.location.hostname === 'git.corp.adobe.com' ? githubUrl : undefined;
+
+const router = new Router(document.body, { baseUrl: baseUrl });
+router.setRoutes([
+    { path: '/', component: 'docs-home' },
+    { path: '/components/:component', component: 'docs-component' },
+]);
+
+export default router;
