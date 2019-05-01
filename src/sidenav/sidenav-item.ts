@@ -108,7 +108,7 @@ export class SideNavItem extends LitElement {
         return html`
             <a
                 .href=${ifDefined(this.href)}
-                class="indentation-level-${this.depth}"
+                data-level="${this.depth}"
                 @click="${this.handleClick}"
                 id="link"
             >
