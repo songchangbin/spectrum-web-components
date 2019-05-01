@@ -13,6 +13,18 @@ governing permissions and limitations under the License.
 :host {
     display: block;
     width: 240px;
+
+    --spectrum-web-component-sidenav-font-weight: var(
+        --spectrum-sidenav-item-font-weight,
+        400
+    );
+}
+
+:host([variant='multilevel']) {
+    --spectrum-web-component-sidenav-font-weight: var(
+        --spectrum-sidenav-multilevel-main-item-font-weight,
+        700
+    );
 }
 
 ul {

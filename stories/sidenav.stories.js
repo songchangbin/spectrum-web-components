@@ -28,11 +28,24 @@ storiesOf('Sidenav', module)
     .add('Default', () => {
         return html`
             <sp-sidenav @select=${eventValue.action('select')}>
-                <sp-sidenav-item value="Section 1" label="Section 1" />
-                <sp-sidenav-item selected value="Section 2" label="Section 2" />
+                <sp-sidenav-item
+                    value="Section 1"
+                    label="Section 1"
+                ></sp-sidenav-item>
+                <sp-sidenav-item
+                    selected
+                    value="Section 2"
+                    label="Section 2"
+                ></sp-sidenav-item>
                 <sp-sidenav-heading label="CATEGORY 1">
-                    <sp-sidenav-item value="Section 3" label="Section 3" />
-                    <sp-sidenav-item value="Section 4" label="Section 4" />
+                    <sp-sidenav-item
+                        value="Section 3"
+                        label="Section 3"
+                    ></sp-sidenav-item>
+                    <sp-sidenav-item
+                        value="Section 4"
+                        label="Section 4"
+                    ></sp-sidenav-item>
                 </sp-sidenav-heading>
             </sp-sidenav>
         `;
@@ -44,17 +57,43 @@ storiesOf('Sidenav', module)
                 value="2.3.1"
                 @select=${eventValue.action('select')}
             >
-                <sp-sidenav-item value="foo" label="foo" />
+                <sp-sidenav-item value="foo" label="foo"></sp-sidenav-item>
                 <sp-sidenav-item value="baz" label="baz">
-                    <sp-sidenav-item value="2.1" label="2.1" />
-                    <sp-sidenav-item value="2.2" label="2.2" />
+                    <sp-sidenav-item value="2.1" label="2.1"></sp-sidenav-item>
+                    <sp-sidenav-item value="2.2" label="2.2"></sp-sidenav-item>
                     <sp-sidenav-item value="2.3" label="2.3">
-                        <sp-sidenav-item value="2.3.1" label="2.3.1" />
-                        <sp-sidenav-item value="2.3.2" label="2.3.2" />
+                        <sp-sidenav-item
+                            value="2.3.1"
+                            label="2.3.1"
+                        ></sp-sidenav-item>
+                        <sp-sidenav-item
+                            value="2.3.2"
+                            label="2.3.2"
+                        ></sp-sidenav-item>
                     </sp-sidenav-item>
                 </sp-sidenav-item>
-                <sp-sidenav-item value="test" label="test" />
-                <sp-sidenav-item value="hi" label="hi" />
+                <sp-sidenav-item value="test" label="test"></sp-sidenav-item>
+                <sp-sidenav-item value="hi" label="hi"></sp-sidenav-item>
+            </sp-sidenav>
+        `;
+    })
+    .add('Hrefs', () => {
+        return html`
+            <sp-sidenav @select=${eventValue.action('select')}>
+                <sp-sidenav-heading label="GITHUB">
+                    <sp-sidenav-item
+                        href="https://github.com/adobe/spectrum-web-components"
+                        label="Code"
+                    ></sp-sidenav-item>
+                    <sp-sidenav-item
+                        href="https://github.com/adobe/spectrum-web-components/issues"
+                        label="Issues"
+                    ></sp-sidenav-item>
+                    <sp-sidenav-item
+                        href="https://github.com/adobe/spectrum-web-components/pulls"
+                        label="Pull Requests"
+                    ></sp-sidenav-item>
+                </sp-sidenav-heading>
             </sp-sidenav>
         `;
     });

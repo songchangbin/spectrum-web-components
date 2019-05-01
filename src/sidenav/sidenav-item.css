@@ -22,6 +22,13 @@ governing permissions and limitations under the License.
         0;
 }
 
+::slotted(sp-sidenav-item) {
+    --spectrum-web-component-sidenav-font-weight: var(
+        --spectrum-sidenav-item-font-weight,
+        400
+    );
+}
+
 #link {
     position: relative;
     display: -ms-inline-flexbox;
@@ -49,7 +56,7 @@ governing permissions and limitations under the License.
         --spectrum-sidenav-item-text-size,
         var(--spectrum-global-dimension-font-size-100)
     );
-    font-weight: var(--spectrum-sidenav-item-font-weight, 400);
+    font-weight: var(--spectrum-web-component-sidenav-font-weight);
     font-style: normal;
     text-decoration: none;
     cursor: pointer;
@@ -117,17 +124,8 @@ governing permissions and limitations under the License.
     );
 }
 
-:host-context(sp-sidenav[variant='multilevel']) #link {
-    font-weight: var(--spectrum-sidenav-multilevel-main-item-font-weight, 700);
-}
-
-:host-context(sp-sidenav[variant='multilevel']) :host {
-    margin: 0;
-    padding: 0;
-}
-
-:host-context(sp-sidenav[variant='multilevel'] sp-sidenav-item) #link {
-    font-weight: var(--spectrum-sidenav-item-font-weight, 400);
+#link.indentation-level-1 {
+    /* font-weight: var(--spectrum-sidenav-item-font-weight, 400); */
     padding-left: calc(
         var(
                 --spectrum-sidenav-multilevel-item-indentation-level1,
@@ -140,8 +138,7 @@ governing permissions and limitations under the License.
     );
 }
 
-:host-context(sp-sidenav[variant='multilevel'] sp-sidenav-item sp-sidenav-item)
-    #link {
+#link.indentation-level-2 {
     padding-left: calc(
         var(
                 --spectrum-sidenav-multilevel-item-indentation-level2,

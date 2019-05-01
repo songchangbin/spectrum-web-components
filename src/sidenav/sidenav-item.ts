@@ -17,6 +17,7 @@ import {
     TemplateResult,
     property,
 } from 'lit-element';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 
 import { SidenavSelectDetail, SideNav } from './sidenav';
 
@@ -38,6 +39,12 @@ export class SideNavItem extends LitElement {
     @property({ type: Boolean, reflect: true })
     public disabled = false;
 
+    @property({ type: Boolean, reflect: true })
+    public collapsed = false;
+
+    @property()
+    public href: string | undefined = undefined;
+
     @property()
     public label: string = '';
 
@@ -47,6 +54,16 @@ export class SideNavItem extends LitElement {
 
     protected get hasChildren(): boolean {
         return !!this.querySelector('sp-sidenav-item');
+    }
+
+    protected get depth(): number {
+        let depth = 0;
+        let element = this.parentElement;
+        while (element instanceof SideNavItem) {
+            depth++;
+            element = element.parentElement;
+        }
+        return depth;
     }
 
     protected firstUpdated(): void {
@@ -66,29 +83,42 @@ export class SideNavItem extends LitElement {
 
     protected handleClick(): void {
         if (this.value && !this.disabled) {
-            const selectDetail: SidenavSelectDetail = {
-                value: this.value,
-            };
+            if (this.hasChildren) {
+                this.collapsed = !this.collapsed;
+            } else {
+                const selectDetail: SidenavSelectDetail = {
+                    value: this.value,
+                };
 
-            const selectionEvent = new CustomEvent<SidenavSelectDetail>(
-                'select',
-                {
-                    bubbles: true,
-                    composed: true,
-                    detail: selectDetail,
-                }
-            );
+                const selectionEvent = new CustomEvent<SidenavSelectDetail>(
+                    'select',
+                    {
+                        bubbles: true,
+                        composed: true,
+                        detail: selectDetail,
+                    }
+                );
 
-            this.dispatchEvent(selectionEvent);
+                this.dispatchEvent(selectionEvent);
+            }
         }
     }
 
     protected render(): TemplateResult {
         return html`
-            <a @click="${this.handleClick}" id="link">
+            <a
+                .href=${ifDefined(this.href)}
+                class="indentation-level-${this.depth}"
+                @click="${this.handleClick}"
+                id="link"
+            >
                 ${this.label}
             </a>
-            <slot></slot>
+            ${this.collapsed
+                ? undefined
+                : html`
+                      <slot></slot>
+                  `}
         `;
     }
 }
