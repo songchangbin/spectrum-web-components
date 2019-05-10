@@ -10,11 +10,11 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, LitElement, CSSResultArray, TemplateResult } from 'lit-element';
+import { html, CSSResultArray, TemplateResult } from 'lit-element';
+import ButtonBase from './button-base';
+import buttonStyles from './spectrum-button.css';
 
-import buttonStyles from './button.css';
-
-export class Button extends LitElement {
+export class Button extends ButtonBase {
     public static is = 'sp-button';
 
     public static get styles(): CSSResultArray {

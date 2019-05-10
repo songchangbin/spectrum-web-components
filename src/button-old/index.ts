@@ -10,3 +10,6 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 export * from './button';
+export * from './button-primary';
+export * from './button-secondary';
+export * from './button-over-bg';

@@ -9,4 +9,20 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-export * from './button';
+import { storiesOf } from '@storybook/polymer';
+import { html } from 'lit-html';
+
+import { defineCustomElements, Button } from '../lib';
+defineCustomElements(Button);
+
+storiesOf('Button', module)
+    .add('Default', () => {
+        return html`
+            <sp-button>Click Me</sp-button>
+        `;
+    })
+    .add('CTA', () => {
+        return html`
+            <sp-button variant="cta">Click Me</sp-button>
+        `;
+    });

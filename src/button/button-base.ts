@@ -9,4 +9,13 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-export * from './button';
+
+import { LitElement, property } from 'lit-element';
+
+export default class ButtonBase extends LitElement {
+    @property({ type: Boolean, reflect: true })
+    protected disabled: boolean = false;
+
+    @property()
+    protected href: string | undefined = undefined;
+}
