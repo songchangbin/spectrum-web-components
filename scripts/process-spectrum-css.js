@@ -32,21 +32,23 @@ async function processComponent(componentPath) {
     );
     const inputCss = await fs.readFile(inputCssPath);
     console.log(chalk.bold.green(`- ${spectrumConfig.spectrum}`));
-    for (const component of spectrumConfig.components) {
-        const outputCssPath = path.join(
-            componentPath,
-            `spectrum-${component.name}.css`
-        );
-        const outputCss = await postcss([
-            postcssSpectrumPlugin({ component }),
-            reporter(),
-        ]).process(inputCss, {
-            from: inputCssPath,
-            to: outputCssPath,
-        });
-        console.log(chalk.bold.green(`  o ${component.name}`));
-        return fs.writeFile(outputCssPath, outputCss, { encoding: 'utf8' });
-    }
+    return Promise.all(
+        spectrumConfig.components.map(async (component) => {
+            const outputCssPath = path.join(
+                componentPath,
+                `spectrum-${component.name}.css`
+            );
+            const outputCss = await postcss([
+                postcssSpectrumPlugin({ component }),
+                reporter(),
+            ]).process(inputCss, {
+                from: inputCssPath,
+                to: outputCssPath,
+            });
+            console.log(chalk.bold.green(`  o ${component.name}`));
+            return fs.writeFile(outputCssPath, outputCss, { encoding: 'utf8' });
+        })
+    );
 }
 
 function processComponents() {

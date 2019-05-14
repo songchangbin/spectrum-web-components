@@ -16,11 +16,6 @@ module.exports = {
         {
             name: 'button',
             host: '.spectrum-Button',
-            // slots: {
-            //     icon: {
-            //         selectors: ['.spectrum-icon[size=\"s\"]:only-child']
-            //     }
-            // },
             attributes: [
                 {
                     type: 'boolean',
@@ -29,6 +24,10 @@ module.exports = {
                 {
                     type: 'boolean',
                     selector: '.spectrum-Button--warning',
+                },
+                {
+                    type: 'boolean',
+                    selector: ':disabled',
                 },
                 {
                     type: 'enum',
@@ -44,6 +43,31 @@ module.exports = {
                 },
             ],
             ids: ['.spectrum-Button-label'],
+        },
+        {
+            name: 'action-button',
+            host: '.spectrum-ActionButton',
+            attributes: [
+                {
+                    type: 'boolean',
+                    selector: '.spectrum-ActionButton--quiet',
+                },
+                {
+                    type: 'boolean',
+                    name: 'hold-affordance',
+                    selector: '.spectrum-ActionButton-hold',
+                },
+                {
+                    type: 'boolean',
+                    selector: ':disabled',
+                },
+                {
+                    type: 'boolean',
+                    name: 'selected',
+                    selector: '.is-selected',
+                },
+            ],
+            ids: ['.spectrum-ActionButton-label'],
         },
     ],
 };

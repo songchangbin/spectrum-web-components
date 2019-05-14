@@ -11,18 +11,81 @@ governing permissions and limitations under the License.
 */
 import { storiesOf } from '@storybook/polymer';
 import { html } from 'lit-html';
+import { action } from '@storybook/addon-actions';
 
 import { defineCustomElements, Button } from '../lib';
+
 defineCustomElements(Button);
 
 storiesOf('Button', module)
     .add('Default', () => {
+        return renderButtonPair({});
+    })
+    .add('variant: cta', () => {
+        return renderButtonPair({
+            variant: 'cta',
+        });
+    })
+    .add('variant: primary', () => {
+        return renderButtonPair({
+            variant: 'primary',
+        });
+    })
+    .add('variant: secondary', () => {
+        return renderButtonPair({
+            variant: 'secondary',
+        });
+    })
+    .add('variant: overBackground', () => {
         return html`
-            <sp-button>Click Me</sp-button>
+            <div
+                style='background-color: rgb(15, 121, 125); color: rgb(15, 121, 125); padding: 15px 20px; display: "inline-block"'
+            >
+                ${renderButtonPair({
+                    variant: 'overBackground',
+                })}
+            </div>
         `;
     })
-    .add('CTA', () => {
-        return html`
-            <sp-button variant="cta">Click Me</sp-button>
-        `;
+    .add('attribute: warning', () => {
+        return renderButtonPair({
+            variant: 'cta',
+            warning: 'true',
+        });
     });
+
+function renderButton(properties) {
+    if (properties.variant) {
+        return html`
+            <sp-button
+                variant="${properties.variant}"
+                .quiet="${!!properties.quiet}"
+                .disabled=${!!properties.disabled}
+                .warning=${!!properties.warning}
+                @click=${action(`Click ${properties.variant}`)}
+            >
+                Click Me
+            </sp-button>
+        `;
+    } else {
+        return html`
+            <sp-button
+                .quiet="${!!properties.quiet}"
+                .disabled=${!!properties.disabled}
+                .warning=${!!properties.warning}
+                @click=${action(`Click ${properties.variant}`)}
+            >
+                Click Me
+            </sp-button>
+        `;
+    }
+}
+
+function renderButtonPair(properties) {
+    const disabled = Object.assign({}, properties, { disabled: true });
+    return html`
+        <div>
+            ${renderButton(properties)} ${renderButton(disabled)}
+        </div>
+    `;
+}

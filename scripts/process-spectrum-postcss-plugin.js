@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /*
 Copyright 2018 Adobe. All rights reserved.
 This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -46,18 +47,23 @@ class SpectrumProcessor {
             return selector;
         });
 
+        // For rules that are just the host selector, do a simple replacement
+        // e.g. ".spectrum-Button" -> ":host"
+        transformations.push((selector) =>
+            selector === this.hostSelector ? ':host' : selector
+        );
+
         // Add a mapping that strips references to the host component from
         // selectors, as the shadow DOM scoping handles that for us
         // e.g. ".spectrum-Button .spectrum-Button-label" -> ".spectrum-Button-label"
         const hostRegex = re`/^${this.hostSelector}\s+(.*)$/`;
         transformations.push((selector) => selector.replace(hostRegex, '$1'));
 
-        // Transform component selectors into :host selectors
-        const hostRegexPartial = re`^${this.hostSelector}([:.][^\s]*)?$`;
+        // If the first part of a selector references the host, then
+        // add a :host wrapper
+        const hostReferenceRegex = re`${this.hostSelector}([:.#\[][^\s]+)(.*)`;
         transformations.push((selector) =>
-            selector.replace(hostRegexPartial, (match, remainder) => {
-                return remainder ? `:host(${remainder})` : ':host';
-            })
+            selector.replace(hostReferenceRegex, ':host($1)$2')
         );
 
         // Map shadow DOM classes to ids
@@ -81,27 +87,38 @@ class SpectrumProcessor {
         if (this.component.attributes) {
             for (const attribute of this.component.attributes) {
                 if (attribute.type === 'boolean') {
-                    const attrName = this.stripHostFromSelector(
-                        attribute.selector
-                    );
+                    const attrName =
+                        attribute.name ||
+                        this.stripHostFromSelector(attribute.selector);
                     const selectorExpr = this.regexForHostSelector(
                         attribute.selector
                     );
-                    transformations.push((selector) =>
-                        selector.replace(selectorExpr, `:host([${attrName}]$1)`)
-                    );
+                    transformations.push((selector) => {
+                        let result = selector.replace(
+                            selectorExpr,
+                            `[${attrName}]$1`
+                        );
+                        if (selector !== result) {
+                            result = this.addHostToSelector(result);
+                        }
+                        return result;
+                    });
                 } else if (attribute.type === 'enum') {
                     for (const selector of attribute.selectors) {
                         const attrName = this.stripHostFromSelector(selector);
                         const selectorExpr = this.regexForHostSelector(
                             selector
                         );
-                        transformations.push((selector) =>
-                            selector.replace(
+                        transformations.push((selector) => {
+                            let result = selector.replace(
                                 selectorExpr,
-                                `:host([${attribute.name}="${attrName}"]$1)`
-                            )
-                        );
+                                `[${attribute.name}="${attrName}"]$1`
+                            );
+                            if (selector !== result) {
+                                result = this.addHostToSelector(result);
+                            }
+                            return result;
+                        });
                     }
                 }
             }
@@ -197,12 +214,17 @@ class SpectrumProcessor {
         parentRule.append(nodes);
     }
 
-    stripHostFromSelector(className) {
+    stripHostFromSelector(selector) {
+        let match = /:(.*)/.exec(selector);
+        if (match) {
+            // We are converting a pseudo class (e.g. :disabled) into a boolean attribute
+            return match[1];
+        }
         const hostPortion = re`/${this.hostSelector}--?(.*)$/`;
-        const match = hostPortion.exec(className);
+        match = hostPortion.exec(selector);
         if (!match) {
             this.warn(
-                `Do not know how to handle classname (${className}) that does not start with host selector (${
+                `Do not know how to handle classname (${selector}) that does not start with host selector (${
                     this.hostSelector
                 })`
             );
@@ -211,8 +233,20 @@ class SpectrumProcessor {
         return match[1];
     }
 
+    addHostToSelector(selector) {
+        // We made a replacement, which means that this expression
+        // is related to an attribute on the host node. We need to
+        // make sure that the first component of the select is
+        // wrapped in :host()
+        if (!/^:host/.test(selector)) {
+            return selector.replace(/^([^\s>+~\|]+)(.*)/, ':host($1)$2');
+        } else {
+            return selector;
+        }
+    }
+
     regexForClassSelector(selector) {
-        return re`/${selector}(?=$|[\s|:,.>+~\[])/`;
+        return re`/${selector}(?=$|[\s|:,.>+~\[\)])/`;
     }
 
     regexForHostSelector(selector) {

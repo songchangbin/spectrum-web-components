@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8" />
         <title>Button - Spectrum Web Components</title>
+        <script>
+            delete Document.prototype.adoptedStyleSheets;
+        </script>
         <script type="module">
             // import the define helper
             import { defineCustomElements } from '../../define.js';
