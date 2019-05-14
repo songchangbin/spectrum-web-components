@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /*
 Copyright 2018 Adobe. All rights reserved.
 This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -70,7 +69,7 @@ class SpectrumProcessor {
         // e.g. ".spectrum-Button-label" -> "#label"
         if (this.component.ids) {
             for (const id of this.component.ids) {
-                const idName = this.stripHostFromSelector(id);
+                const idName = id.name || this.stripHostFromSelector(id);
                 if (idName) {
                     const idSelector = `#${idName}`;
                     transformations.push((selector) =>
@@ -124,6 +123,12 @@ class SpectrumProcessor {
             }
         }
 
+        if (this.component.selectorTransforms) {
+            this.component.selectorTransforms.forEach((transform) =>
+                transformations.push(transform)
+            );
+        }
+
         return (selector, rule) => {
             let result = selector;
             for (const transformation of transformations) {
@@ -142,7 +147,19 @@ class SpectrumProcessor {
 
         for (let selector of rule.selectors) {
             if (!startsWithHost.test(selector)) {
-                continue;
+                // This selector does not match the component we are
+                // working on. Check to see if it matches an id
+                let skip = true;
+                if (this.component.ids) {
+                    for (const id of this.component.ids) {
+                        const idSelector = id.selector || id;
+                        if (re`^${idSelector}(?![-\w])`.test(selector)) {
+                            skip = false;
+                            break;
+                        }
+                    }
+                }
+                if (skip) continue;
             }
             const transformed = selectorTransform(selector, rule);
             if (transformed) {
@@ -181,6 +198,14 @@ class SpectrumProcessor {
                 return false;
             });
             return;
+        }
+
+        if (this.component.exclude) {
+            for (const regex of this.component.exclude) {
+                if (regex.test(rule.selector)) {
+                    return;
+                }
+            }
         }
 
         const convertedSelectors = this.convertSelectors(rule);
@@ -223,6 +248,36 @@ class SpectrumProcessor {
         const hostPortion = re`/${this.hostSelector}--?(.*)$/`;
         match = hostPortion.exec(selector);
         if (!match) {
+            // Is this in our id list?
+            if (this.component.ids) {
+                for (const id of this.component.ids) {
+                    const idSelector = id.selector || id;
+                    const idPortion = re`/^${idSelector}(?![-\w])/`;
+
+                    if (idPortion.test(selector)) {
+                        // This matches an id, so skip it
+                        return selector;
+                    }
+                }
+            }
+
+            // Does it match an attribute selector?
+            if (this.component.attributes) {
+                for (const attribute of this.component.attributes) {
+                    const selectors = attribute.selectors || [
+                        attribute.selector,
+                    ];
+                    for (const selector of selectors) {
+                        const regex = re`/^${selector}(?![-\w])/`;
+
+                        if (regex.test(selector)) {
+                            // This matches an id, so skip it
+                            return selector;
+                        }
+                    }
+                }
+            }
+
             this.warn(
                 `Do not know how to handle classname (${selector}) that does not start with host selector (${
                     this.hostSelector
@@ -245,7 +300,8 @@ class SpectrumProcessor {
         }
     }
 
-    regexForClassSelector(selector) {
+    regexForClassSelector(id) {
+        const selector = id.selector || id;
         return re`/${selector}(?=$|[\s|:,.>+~\[\)])/`;
     }
 
