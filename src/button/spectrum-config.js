@@ -10,6 +10,23 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+const customSelectorTransforms = [
+    // Shift the rules from :host to #heading
+    (selector) => (selector === ':host' ? '#button' : selector),
+    // Modify focus rules to reflect that the button element in
+    // the shadow DOM will receive the focus
+    (selector) => selector.replace(/\.focus-ring/, ':focus'),
+    (selector) =>
+        selector.replace(/^:host\((::?[^\):]*focus[^\)]*)\)$/, '#button$1'),
+    (selector) =>
+        selector.replace(
+            /^:host\(([^\)]+)(::?[^\):]*focus[^\)]*)\)$/,
+            ':host($1) #button$2'
+        ),
+    // Make the attribute related rules apply to the button element
+    (selector) => selector.replace(/^:host\(([^\)]+)\)$/, ':host($1) #button'),
+];
+
 module.exports = {
     spectrum: 'button',
     components: [
@@ -43,29 +60,7 @@ module.exports = {
                 },
             ],
             ids: ['.spectrum-Button-label'],
-            selectorTransforms: [
-                // Shift the rules from :host to #heading
-                (selector) => (selector === ':host' ? '#button' : selector),
-                // Modify focus rules to reflect that the button element in
-                // the shadow DOM will receive the focus
-                (selector) => selector.replace(/\.focus-ring/, ':focus'),
-                (selector) =>
-                    selector.replace(
-                        /^:host\((::?[^\):]*focus[^\)]*)\)$/,
-                        '#button$1'
-                    ),
-                (selector) =>
-                    selector.replace(
-                        /^:host\(([^\)]+)(::?[^\):]*focus[^\)]*)\)$/,
-                        ':host($1) #button$2'
-                    ),
-                // Make the attribute related rules apply to the button element
-                (selector) =>
-                    selector.replace(
-                        /^:host\(([^\)]+)\)$/,
-                        ':host($1) #button'
-                    ),
-            ],
+            selectorTransforms: customSelectorTransforms,
         },
         {
             name: 'action-button',
@@ -91,29 +86,7 @@ module.exports = {
                 },
             ],
             ids: ['.spectrum-ActionButton-label'],
-            selectorTransforms: [
-                // Shift the rules from :host to #heading
-                (selector) => (selector === ':host' ? '#button' : selector),
-                // Modify focus rules to reflect that the button element in
-                // the shadow DOM will receive the focus
-                (selector) => selector.replace(/\.focus-ring/, ':focus'),
-                (selector) =>
-                    selector.replace(
-                        /^:host\((::?[^\):]*focus[^\)]*)\)$/,
-                        '#button$1'
-                    ),
-                (selector) =>
-                    selector.replace(
-                        /^:host\(([^\)]+)(::?[^\):]*focus[^\)]*)\)$/,
-                        ':host($1) #button$2'
-                    ),
-                // Make the attribute related rules apply to the button element
-                (selector) =>
-                    selector.replace(
-                        /^:host\(([^\)]+)\)$/,
-                        ':host($1) #button'
-                    ),
-            ],
+            selectorTransforms: customSelectorTransforms,
         },
     ],
 };
