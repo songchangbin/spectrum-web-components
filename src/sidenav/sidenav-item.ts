@@ -40,7 +40,7 @@ export class SideNavItem extends LitElement {
     public disabled = false;
 
     @property({ type: Boolean, reflect: true })
-    public collapsed = false;
+    public expanded = true;
 
     @property()
     public href: string | undefined = undefined;
@@ -84,7 +84,7 @@ export class SideNavItem extends LitElement {
     protected handleClick(): void {
         if (this.value && !this.disabled) {
             if (this.hasChildren) {
-                this.collapsed = !this.collapsed;
+                this.expanded = !this.expanded;
             } else {
                 const selectDetail: SidenavSelectDetail = {
                     value: this.value,
@@ -114,11 +114,11 @@ export class SideNavItem extends LitElement {
             >
                 ${this.label}
             </a>
-            ${this.collapsed
-                ? undefined
-                : html`
+            ${this.expanded
+                ? html`
                       <slot></slot>
-                  `}
+                  `
+                : undefined}
         `;
     }
 }

@@ -22,7 +22,11 @@ module.exports = {
                     selector: '.spectrum-SideNav--multiLevel',
                 },
             ],
-            exclude: [/^\.spectrum-SideNav-(item|heading)/],
+            exclude: [
+                /^\.spectrum-SideNav-(item|heading)/,
+                // We cannot do global matches like this with shadow DOM
+                /^\.spectrum-SideNav--multiLevel\s\.spectrum-SideNav/,
+            ],
         },
         {
             name: 'sidenav-item',

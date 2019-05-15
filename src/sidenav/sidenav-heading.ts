@@ -19,7 +19,7 @@ import {
 } from 'lit-element';
 
 import sidenavItemStyles from './sidenav-item.css';
-import sidenavHeadingStyles from './spectrum-sidenav-heading.css';
+import sidenavHeadingStyles from './sidenav-heading.css';
 
 export class SideNavHeading extends LitElement {
     public static readonly is = 'sp-sidenav-heading';
