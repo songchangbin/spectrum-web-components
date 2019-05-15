@@ -52,6 +52,20 @@ storiesOf('Button', module)
             variant: 'cta',
             warning: 'true',
         });
+    })
+    .add('min-width button', () => {
+        return html`
+            <div>
+                <style>
+                    sp-button {
+                        min-width: 300px;
+                    }
+                </style>
+                ${renderButtonPair({
+                    variant: 'cta',
+                })}
+            </div>
+        `;
     });
 
 function renderButton(properties) {

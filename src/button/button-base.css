@@ -12,12 +12,18 @@ governing permissions and limitations under the License.
 
 :host {
     display: inline-flex;
+    flex-direction: row;
 
     /* spectrum-css uses `-webkit-appearance: button` to workaround an
      * iOS and Safari issue. However, it results in incorrect styling 
      * when applied in :host
      */
     -webkit-appearance: none;
+}
+
+#button {
+    display: flex;
+    flex: 1 1 auto;
 }
 
 :host(:focus),

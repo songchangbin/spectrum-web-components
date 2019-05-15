@@ -18,7 +18,7 @@ export class Button extends ButtonBase {
     public static is = 'sp-button';
 
     @property({ reflect: true })
-    protected variant: string | undefined;
+    protected variant: string = 'cta';
 
     @property({ type: Boolean, reflect: true })
     protected warning: boolean = false;
