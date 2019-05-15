@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, CSSResultArray, TemplateResult, property } from 'lit-element';
+import { CSSResultArray, property } from 'lit-element';
 import ButtonBase from './button-base';
 import buttonStyles from './button.css';
 
@@ -18,7 +18,7 @@ export class Button extends ButtonBase {
     public static is = 'sp-button';
 
     @property({ reflect: true })
-    protected variant: string = 'cta';
+    protected variant: string | undefined;
 
     @property({ type: Boolean, reflect: true })
     protected warning: boolean = false;
@@ -28,12 +28,5 @@ export class Button extends ButtonBase {
 
     public static get styles(): CSSResultArray {
         return [buttonStyles];
-    }
-
-    protected render(): TemplateResult {
-        return html`
-            <div id="icon"><slot name="icon"></slot></div>
-            <span id="label"><slot></slot></span>
-        `;
     }
 }

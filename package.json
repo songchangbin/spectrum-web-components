@@ -20,6 +20,7 @@
     },
     "scripts": {
         "split-spectrum": "node ./scripts/split-spectrum.js",
+        "process-spectrum": "node ./scripts/process-spectrum-css.js",
         "process-icons": "node ./scripts/process-icons.js",
         "prebuild": "rimraf lib",
         "build": "gulp",
