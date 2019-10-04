@@ -65,6 +65,9 @@ export class Dropdown extends Focusable {
     @property({ type: String })
     public value = '';
 
+    @property({ type: String })
+    public valueText = '';
+
     protected listRole = 'listbox';
     protected itemRole = 'option';
 
@@ -153,7 +156,8 @@ export class Dropdown extends Focusable {
 
     public setValueFromItem(item: MenuItem): void {
         const oldValue = this.value;
-        this.value = (item.textContent || /* istanbul ignore next */ '').trim();
+        this.value = item.value;
+        this.valueText = item.itemText;
         const applyDefault = this.dispatchEvent(
             new Event('change', {
                 cancelable: true,
@@ -184,7 +188,7 @@ export class Dropdown extends Focusable {
                     class=${ifDefined(this.value ? undefined : 'placeholder')}
                 >
                     ${this.value
-                        ? this.value
+                        ? this.valueText
                         : html`
                               <slot></slot>
                           `}

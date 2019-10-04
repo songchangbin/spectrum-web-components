@@ -37,7 +37,7 @@ const dropdownFixture = async (): Promise<Dropdown> =>
                     <sp-menu-item>
                         Deselect
                     </sp-menu-item>
-                    <sp-menu-item>
+                    <sp-menu-item value="opt-2">
                         Select Inverse
                     </sp-menu-item>
                     <sp-menu-item>
@@ -107,16 +107,16 @@ describe('Dropdown', () => {
         button.click();
         await elementUpdated(el);
 
-        const openContent = button.textContent ? button.textContent : '';
         expect(el.open).to.be.true;
-        expect(openContent.trim()).to.equal('');
+        expect(el.valueText).to.equal('');
+        expect(el.value).to.equal('');
 
         secondItem.click();
         await elementUpdated(el);
 
-        const closedContent = button.textContent ? button.textContent : '';
         expect(el.open).to.be.false;
-        expect(closedContent.trim()).to.equal('Select Inverse');
+        expect(el.valueText).to.equal('Select Inverse');
+        expect(el.value).to.equal('opt-2');
     });
     it('re-selects', async () => {
         const el = await dropdownFixture();
@@ -134,29 +134,30 @@ describe('Dropdown', () => {
         button.click();
         await elementUpdated(el);
 
-        const openContent = button.textContent ? button.textContent : '';
         expect(el.open).to.be.true;
-        expect(openContent.trim()).to.equal('');
+        expect(el.valueText).to.equal('');
+        expect(el.value).to.equal('');
 
         secondItem.click();
         await elementUpdated(el);
 
-        let closedContent = button.textContent ? button.textContent : '';
         expect(el.open).to.be.false;
-        expect(closedContent.trim()).to.equal('Select Inverse');
+        expect(el.valueText).to.equal('Select Inverse');
+        expect(el.value).to.equal('opt-2');
 
         button.click();
         await elementUpdated(el);
 
         expect(el.open).to.be.true;
-        expect(openContent.trim()).to.equal('');
+        expect(el.valueText).to.equal('Select Inverse');
+        expect(el.value).to.equal('opt-2');
 
         firstItem.click();
         await elementUpdated(el);
 
-        closedContent = button.textContent ? button.textContent : '';
         expect(el.open).to.be.false;
-        expect(closedContent.trim()).to.equal('Deselect');
+        expect(el.valueText).to.equal('Deselect');
+        expect(el.value).to.equal('Deselect');
     });
     it('can have selection prevented', async () => {
         const el = await dropdownFixture();
@@ -171,17 +172,14 @@ describe('Dropdown', () => {
         button.click();
         await elementUpdated(el);
 
-        const openContent = button.textContent ? button.textContent : '';
         expect(el.open).to.be.true;
-        expect(openContent.trim()).to.equal('');
+        expect(el.valueText).to.equal('');
+        expect(el.value).to.equal('');
         expect(secondItem.selected).to.be.false;
 
-        el.addEventListener(
-            'change',
-            (e: Event): void => {
-                e.preventDefault();
-            }
-        );
+        el.addEventListener('change', (e: Event): void => {
+            e.preventDefault();
+        });
 
         secondItem.click();
         await elementUpdated(el);
@@ -212,16 +210,16 @@ describe('Dropdown', () => {
         button.dispatchEvent(arrowDownEvent);
         await elementUpdated(el);
 
-        const openContent = button.textContent ? button.textContent : '';
         expect(el.open).to.be.true;
-        expect(openContent.trim()).to.equal('');
+        expect(el.valueText).to.equal('');
+        expect(el.value).to.equal('');
 
         firstItem.click();
         await elementUpdated(el);
 
-        const closedContent = button.textContent ? button.textContent : '';
         expect(el.open).to.be.false;
-        expect(closedContent.trim()).to.equal('Deselect');
+        expect(el.valueText).to.equal('Deselect');
+        expect(el.value).to.equal('Deselect');
     });
     it('loads', async () => {
         const el = await dropdownFixture();

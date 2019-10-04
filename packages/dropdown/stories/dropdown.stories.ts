@@ -32,22 +32,22 @@ storiesOf('Dropdown', module).add('Default', () => {
         >
             Select a Country with a very long label, too long in fact
             <sp-menu slot="options" role="listbox">
-                <sp-menu-item>
+                <sp-menu-item value="opt-1">
                     Deselect
                 </sp-menu-item>
-                <sp-menu-item>
+                <sp-menu-item value="opt-2">
                     Select Inverse
                 </sp-menu-item>
                 <sp-menu-item>
                     Feather...
                 </sp-menu-item>
-                <sp-menu-item>
+                <sp-menu-item value="opt-4">
                     Select and Mask...
                 </sp-menu-item>
                 <sp-menu-divider></sp-menu-divider>
                 <sp-menu-item>
                     Save Selection
-                </sp-menu-item>
+                </sp-menu-item value="opt-6">
                 <sp-menu-item disabled>
                     Make Work Path
                 </sp-menu-item>
