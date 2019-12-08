@@ -88,7 +88,7 @@
         "@commitlint/cli": "^8.2.0",
         "@commitlint/config-conventional": "^8.2.0",
         "@commitlint/config-lerna-scopes": "^8.2.0",
-        "@open-wc/building-webpack": "^2.1.1",
+        "@open-wc/building-webpack": "^2.9.0",
         "@open-wc/polyfills-loader": "^0.3.2",
         "@open-wc/testing": "^2.3.3",
         "@open-wc/testing-karma": "^3.1.24",
