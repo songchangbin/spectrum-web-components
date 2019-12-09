@@ -91,7 +91,7 @@
         "@open-wc/building-webpack": "^2.1.1",
         "@open-wc/polyfills-loader": "^0.3.2",
         "@open-wc/testing": "^2.3.3",
-        "@open-wc/testing-karma": "^3.1.24",
+        "@open-wc/testing-karma": "^3.2.15",
         "@spectrum-css/link": "^2.0.2",
         "@spectrum-css/rule": "^2.0.2",
         "@spectrum-css/table": "^2.0.2",
