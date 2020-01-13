@@ -37,6 +37,7 @@ module.exports = (config) => {
                     },
                 },
             },
+            browserNoActivityTimeout: 60000,
             coverageIstanbulReporter: {
                 thresholds: {
                     global: {
