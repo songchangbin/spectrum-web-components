@@ -79,7 +79,7 @@ module.exports = {
 
         async function takeAndCompareScreenshot(page, test) {
             await page.goto(`http://127.0.0.1:4444/iframe.html?id=${test}`, {
-                waitUntil: 'networkidle2',
+                waitUntil: 'networkidle0',
             });
             await page.screenshot({
                 path: `${currentDir}/${type}/${test}.png`,
