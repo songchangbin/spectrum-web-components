@@ -22,7 +22,7 @@ const stories = require('./stories');
 const currentDir = `${process.cwd()}/test/visual/screenshots-current`;
 const baselineDir = `${process.cwd()}/test/visual/screenshots-baseline`;
 
-const Threashold = 11;
+const Threashold = 1;
 
 module.exports = {
     checkScreenshots(type) {
