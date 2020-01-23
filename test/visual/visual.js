@@ -132,7 +132,7 @@ module.exports = {
                         diff.data,
                         img1.width,
                         img1.height,
-                        { threshold: 0.2 }
+                        { threshold: 0 }
                     );
                     const percentDiff =
                         (numDiffPixels / (img1.width * img1.height)) * 100;
