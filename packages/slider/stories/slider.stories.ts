@@ -59,8 +59,53 @@ export const Default = (): TemplateResult => {
                 ?tick-labels="${tickLabels}"
                 id="opacity-slider"
                 variant=${ifDefined(variant || undefined)}
-                @sp-slider:input=${handleEvent}
-                @sp-slider:change=${handleEvent}
+                @input=${handleEvent}
+                @change=${handleEvent}
+            ></sp-slider>
+        </div>
+    `;
+};
+
+export const Gradient = (): TemplateResult => {
+    const sliderVariants = ['', ...variants];
+    const value = number('Value', 50, {}, 'Element');
+    const min = number('Min', 0, {}, 'Element');
+    const max = number('Max', 100, {}, 'Element');
+    const step = number('Step', 1, {}, 'Element');
+    const tickStep = number('Tick Step', 10, {}, 'Element');
+    const label = text('Label', 'Opacity', 'Element');
+    const tickLabels = boolean('Tick Labels', false, 'Element');
+    const variant = select(
+        'Variant',
+        sliderVariants,
+        sliderVariants[0],
+        'Element'
+    );
+    const trackColor = text(
+        'Track Color',
+        'linear-gradient(to right, red, green 100%)',
+        'Element'
+    );
+    const handleEvent = (event: Event): void => {
+        const target = event.target as Slider;
+        action(event.type)(target.value);
+    };
+    return html`
+        <div
+            style="width: 500px; margin: 12px 20px;--spectrum-slider-track-color:${trackColor};"
+        >
+            <sp-slider
+                value="${value}"
+                step="${step}"
+                tick-step="${tickStep}"
+                min="${min}"
+                max="${max}"
+                label="${label}"
+                ?tick-labels="${tickLabels}"
+                id="opacity-slider"
+                variant=${ifDefined(variant || undefined)}
+                @input=${handleEvent}
+                @change=${handleEvent}
             ></sp-slider>
         </div>
     `;
