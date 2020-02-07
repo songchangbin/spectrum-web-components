@@ -3103,6 +3103,11 @@
   resolved "https://registry.yarnpkg.com/@spectrum-css/popover/-/popover-2.0.4.tgz#84389c9b4ab38855f3f3429f4c14238751d4789b"
   integrity sha512-MHohPkPcAGnL5KlmXvd/+MJS1uPKtS3WkMPE+EfvJbgCIartz47FLTVqPCfEyfOek8vhRkIvRKmrbQ2VFvqPZw==
 
+"@spectrum-css/quickaction@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/quickaction/-/quickaction-2.0.4.tgz#47bc32a20aea253bdfcd6121288d63307b792135"
+  integrity sha512-/PS/+xns50X2jPDxUkuGQDq1hU6zIHigbP+4Aak0LLKaan6Yk6m3rFe+1fzFTQNwYc9hP+puAEKGh3F/P7JYPg==
+
 "@spectrum-css/radio@^2.0.4":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@spectrum-css/radio/-/radio-2.0.4.tgz#84c8a5541da36989830bdce3245d681cc407d871"
